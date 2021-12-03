@@ -45,11 +45,12 @@ contract VolcanoToken is ERC721URIStorage, Ownable {
 
     function BurnToken (uint256 tokenId) public returns(bool) {
         // require only owner to call function to burn token
-        require(msg.sender == ownerOf(tokenId), "BurnToken: You are not the owner of the token");
+        address owner = ownerOf(tokenId);
+        require(msg.sender == owner, "BurnToken: You are not the owner of the token");
         _burn(tokenId);
 
         // remove the burned token from the OwnerTokens mapping
-        RemoveToken(ownerOf(tokenId),tokenId);
+        RemoveToken(owner,tokenId);
         return true;
     }
 
