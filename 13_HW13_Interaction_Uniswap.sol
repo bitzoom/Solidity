@@ -15,8 +15,8 @@ contract DeFi {
     // For this example, we will set the pool fee to 0.3%.    
     uint24 public constant poolFee = 3000;
 
-    constructor() {
-        swapRouter = 0xE592427A0AEce92De3Edee1F18E0157C05861564;
+    constructor(ISwapRouter _swapRouter) {
+        swapRouter = _swapRouter;
     }
 
     /// @notice swapExactInputSingle swaps a fixed amount of DAI for a maximum possible amount of WETH9    
@@ -46,7 +46,6 @@ contract DeFi {
         
         // The call to `exactInputSingle` executes the swap.        
         amountOut = swapRouter.exactInputSingle(params);    
-    
     }
         
         /// @notice swapExactOutputSingle swaps a minimum possible amount of DAI for a fixed amount of WETH.    
@@ -84,5 +83,4 @@ contract DeFi {
             TransferHelper.safeTransfer(DAI, msg.sender, amountInMaximum - amountIn);
         }    
     }
-}
 }
